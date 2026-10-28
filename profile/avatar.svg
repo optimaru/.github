@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="optimaru">
+  <rect width="512" height="512" fill="#0F1512"/>
+  <!-- 마루: a search path climbing to the peak (the optimum). The peak is a lit green lamp. -->
+  <polyline points="88,388 160,300 216,340 296,188 360,252 424,124" fill="none" stroke="#F8F8F4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="88" cy="388" r="20" fill="#F8F8F4"/>
+  <circle cx="160" cy="300" r="20" fill="#F8F8F4"/>
+  <circle cx="216" cy="340" r="20" fill="#F8F8F4"/>
+  <circle cx="296" cy="188" r="20" fill="#F8F8F4"/>
+  <circle cx="360" cy="252" r="20" fill="#F8F8F4"/>
+  <circle cx="424" cy="124" r="56" fill="#00C25A" opacity="0.22"/>
+  <circle cx="424" cy="124" r="36" fill="#00C25A"/>
+</svg>
