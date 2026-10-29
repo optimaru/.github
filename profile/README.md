@@ -4,7 +4,7 @@
 </picture>
 
 The optimaru project develops open-source tools to solve real-world combinatorial optimization problems — scheduling, routing and assignment.
-- [optimaru](https://github.com/optimaru/optimaru), a dependency-free, header-only C++17 metaheuristic solver engine with Python bindings and 20+ ready-to-run use cases, benchmarked against Timefold Solver and OR-Tools CP-SAT.
+- [optimaru](https://github.com/optimaru/optimaru), a dependency-free, header-only C++17 metaheuristic solver engine with Python bindings and 20+ ready-to-run use cases, benchmarked against Google OR-Tools.
   It comes in a free edition and a paid edition; only the free edition is open source.
 
 Website: [optimaru.com](https://optimaru.com)
