@@ -1,0 +1,53 @@
+name: version
+description: >-
+  Work out the deploy version and write it into the versioned files of the checkout.
+  prod: the latest vX.Y.Z tag raised by `bump` (on a vX.Y.Z tag ref: that version).
+  stage: the latest vX.Y.Z with -stageN appended, N counting up from 0.
+  Run it after actions/checkout and before the build; run ./publish after the deploy.
+
+inputs:
+  environment:
+    description: prod or stage
+    required: true
+  bump:
+    description: major, minor or patch (prod only)
+    required: false
+    default: patch
+  files:
+    description: >-
+      Versioned files or globs, one per line: pyproject.toml (a uv.lock next to it follows) or
+      package.json (a package-lock.json next to it follows). The first one is the base
+      version while there is no vX.Y.Z tag.
+    required: false
+    default: ""
+
+outputs:
+  version:
+    description: semver form (1.2.3, 1.2.3-stage0)
+    value: ${{ steps.plan.outputs.version }}
+  pep440:
+    description: Python form (1.2.3, 1.2.3+stage0)
+    value: ${{ steps.plan.outputs.pep440 }}
+  tag:
+    description: git tag (v1.2.3, v1.2.3-stage0)
+    value: ${{ steps.plan.outputs.tag }}
+  previous_tag:
+    description: the release before this one (prod), for the release notes
+    value: ${{ steps.plan.outputs.previous_tag }}
+  existing:
+    description: true when the run is on an existing production tag
+    value: ${{ steps.plan.outputs.existing }}
+  files:
+    description: files the version was written into, lockfiles included
+    value: ${{ steps.plan.outputs.files }}
+
+runs:
+  using: composite
+  steps:
+    - id: plan
+      shell: bash
+      env:
+        ENVIRONMENT: ${{ inputs.environment }}
+        BUMP: ${{ inputs.bump }}
+        FILES: ${{ inputs.files }}
+      run: python3 "$GITHUB_ACTION_PATH/version.py" plan
