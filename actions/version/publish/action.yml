@@ -1,0 +1,53 @@
+name: version publish
+description: >-
+  After a successful deploy. stage: push the vX.Y.Z-stageN tag on the deployed commit.
+  prod: commit the versioned files on top of the deployed commit, tag it vX.Y.Z, push the
+  tag, bring the commit to the default branch, and create the GitHub release with generated
+  notes. Needs `contents: write` and the outputs of the version action.
+
+inputs:
+  environment:
+    description: prod or stage (as given to the version action)
+    required: true
+  tag:
+    description: steps.<version>.outputs.tag
+    required: true
+  previous_tag:
+    description: steps.<version>.outputs.previous_tag
+    required: false
+    default: ""
+  existing:
+    description: steps.<version>.outputs.existing
+    required: false
+    default: "false"
+  files:
+    description: steps.<version>.outputs.files
+    required: false
+    default: ""
+  release:
+    description: create the GitHub release (prod); false only tags and commits
+    required: false
+    default: "true"
+  branch:
+    description: branch the prod version commit goes to
+    required: false
+    default: main
+  token:
+    description: token for the release
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        ENVIRONMENT: ${{ inputs.environment }}
+        TAG: ${{ inputs.tag }}
+        PREVIOUS_TAG: ${{ inputs.previous_tag }}
+        EXISTING: ${{ inputs.existing }}
+        CHANGED: ${{ inputs.files }}
+        RELEASE: ${{ inputs.release }}
+        BRANCH: ${{ inputs.branch }}
+        GH_TOKEN: ${{ inputs.token }}
+      run: python3 "$GITHUB_ACTION_PATH/../version.py" publish
