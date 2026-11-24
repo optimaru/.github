@@ -12,7 +12,7 @@ inputs:
   bump:
     description: major, minor or patch (prod only)
     required: false
-    default: patch
+    default: minor
   files:
     description: >-
       Versioned files or globs, one per line: pyproject.toml (a uv.lock next to it follows) or

@@ -4,7 +4,7 @@ Release versioning for the deploy workflows of the optimaru repositories.
 
 | Deploy | Tag | `pyproject.toml` | `package.json` | GitHub release |
 | --- | --- | --- | --- | --- |
-| prod | `vX.Y.Z`: the latest `vX.Y.Z` raised by the chosen bump (major, minor, patch) | `X.Y.Z`, committed to `main` | `X.Y.Z`, committed to `main` | yes, notes generated since the previous release |
+| prod | `vX.Y.Z`: the latest `vX.Y.Z` raised by the chosen bump (major, minor (default), patch) | `X.Y.Z`, committed to `main` | `X.Y.Z`, committed to `main` | yes, notes generated since the previous release |
 | stage | `vX.Y.Z-stageN`: the latest `vX.Y.Z`, N counting up from 0 | `X.Y.Z+stageN` in the build only | `X.Y.Z-stageN` in the build only | no |
 
 With no `vX.Y.Z` tag yet, the version in the first listed file is the base. A `uv.lock`
