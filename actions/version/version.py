@@ -51,7 +51,11 @@ def fmt(v: Version) -> str:
 
 
 def files() -> list[Path]:
-    paths = [Path(line.strip()) for line in os.environ.get("FILES", "").splitlines() if line.strip()]
+    paths: list[Path] = []
+    for line in os.environ.get("FILES", "").splitlines():
+        if pattern := line.strip():
+            # A glob (apps/*/package.json) expands in sorted order; a plain path is kept as given.
+            paths += sorted(Path().glob(pattern)) if any(c in pattern for c in "*?[") else [Path(pattern)]
     for path in paths:
         if path.name not in ("pyproject.toml", "package.json"):
             fail(f"{path}: only pyproject.toml and package.json are versioned files")
